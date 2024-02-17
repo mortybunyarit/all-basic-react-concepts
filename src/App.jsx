@@ -9,16 +9,32 @@ import { useState } from "react";
 export default function App() {
   const [userAction, setUserAction] = useState("เลือกทำรายการ");
   const [bookCheckout, setBookCheckOut] = useState(5);
+  const [textShow, setTextShow] = useState("");
 
   const handleCheckOut = () => {
     if (bookCheckout > 0) {
-      ("ยืมหนังสือ");
+      setUserAction("ยืมหนังสือเล่มนี้");
       setBookCheckOut(bookCheckout - 1);
+      setTextShow("คุณเคยยื่มหนังสือเล่มนี้ไปแล้ว");
     } else {
       alert(
         "คุณยืมหนังสือครบ 5 เล่มแล้ว ไม่สามารถยืมเพิ่มได้ หากมีข้อสงสัยกรุณาติดต่อเจ้าหน้าที่"
       );
     }
+  };
+
+  //   //user กด favourite แล้วต้องเกิด
+  // 1. คุณได้: กดถูกใจหนังสือเล่มนี้
+  // 2. ข้อความคุณยืมหนังสือเรื่องนี้แล้วหายไป
+
+  const handleFavorite = () => {
+    setUserAction("กดถูกใจหนังสือเล่มนี้");
+    setTextShow("");
+  };
+
+  const handleReserve = () => {
+    setUserAction("จองหนังสือเล่มนี้");
+    setTextShow("");
   };
 
   return (
@@ -39,19 +55,20 @@ export default function App() {
         </h1>
         <div className="my-4">
           <button
-            onClick={() => setUserAction("กดถูกใจหนังสือเล่มนี้")}
+            onClick={handleFavorite}
             className="border border-pink-400 bg-pink-500 rounded-lg p-2 text-white"
           >
             Favourite
           </button>
           <button
-            onClick={() => setUserAction("จองหนังสือเล่มนี้")}
+            onClick={handleReserve}
             className="border border-orange-400 bg-orange-600 rounded-lg p-2 text-white mx-5"
           >
             Reserve
           </button>
           <button
             onClick={handleCheckOut}
+            // onClick={() => setUserAction("ยืมหนังสือเล่มนี้")}
             className="border border-green-400 bg-green-600 rounded-lg p-2 text-white"
           >
             Checkout
@@ -67,6 +84,7 @@ export default function App() {
           </span>{" "}
           เล่ม
         </p>
+        <p>{textShow}</p>
       </section>
     </main>
   );
