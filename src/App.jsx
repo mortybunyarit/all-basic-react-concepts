@@ -4,23 +4,29 @@
     เช่น เดิมมีสิทธิ์ยืม 5 เล่ม จะเหลือยืมหนังสือเพิ่มได้อีกเพียง 4 เล่ม เนื่องจากถือว่ายืมเล่มนี้ไปแล้ว
     กรณีที่สิทธิ์ในการยืมหนังสือเหลือ 0/5 จะยืมหนังสือไม่ได้อีก และจะมีข้อความแจ้งเตือน 
 */
+import { useState } from "react";
 
 export default function App() {
-  const [userAction, setUserAction] = useState([]);
-  const bookCheckout = 5;
+  const [userAction, setUserAction] = useState("เลือกทำรายการ");
+  const [bookCheckout, setBookCheckOut] = useState(5);
 
   const handleCheckOut = () => {
-    if (bookCheckout) {
-      
+    if (bookCheckout > 0) {
+      ("ยืมหนังสือ");
+      setBookCheckOut(bookCheckout - 1);
     } else {
-      alert('คุณยืมหนังสือครบ 5 เล่มแล้ว ไม่สามารถยืมเพิ่มได้ หากมีข้อสงสัยกรุณาติดต่อเจ้าหน้าที่');
+      alert(
+        "คุณยืมหนังสือครบ 5 เล่มแล้ว ไม่สามารถยืมเพิ่มได้ หากมีข้อสงสัยกรุณาติดต่อเจ้าหน้าที่"
+      );
     }
-  }
+  };
 
   return (
     <main>
       <section className="bg-sky-200 h-[60px]">
-        <h1 className="font-bold text-4xl text-orange-700 p-2">Morty Library</h1>
+        <h1 className="font-bold text-4xl text-orange-700 p-2">
+          Morty Library
+        </h1>
       </section>
       <section className="pt-10 flex justify-center flex-col items-center">
         <img
@@ -32,20 +38,35 @@ export default function App() {
           The life of lovely black dog named Soli
         </h1>
         <div className="my-4">
-          <button className="border border-pink-400 bg-pink-500 rounded-lg p-2 text-white">
+          <button
+            onClick={() => setUserAction("กดถูกใจหนังสือเล่มนี้")}
+            className="border border-pink-400 bg-pink-500 rounded-lg p-2 text-white"
+          >
             Favourite
           </button>
-          <button className="border border-orange-400 bg-orange-600 rounded-lg p-2 text-white mx-5">
+          <button
+            onClick={() => setUserAction("จองหนังสือเล่มนี้")}
+            className="border border-orange-400 bg-orange-600 rounded-lg p-2 text-white mx-5"
+          >
             Reserve
           </button>
-          <button onClick={handleCheckOut} className="border border-green-400 bg-green-600 rounded-lg p-2 text-white">
+          <button
+            onClick={handleCheckOut}
+            className="border border-green-400 bg-green-600 rounded-lg p-2 text-white"
+          >
             Checkout
           </button>
         </div>
         <p className="text-lg font-semibold text-red-800">
-          คุณได้: 
+          คุณได้: {userAction}
         </p>
-        <p className="font-semibold mt-2">คุณเหลือสิทธิ์ในการยืมหนังสือ <span className="underline decoration-double text-sky-500">{bookCheckout}/5</span> เล่ม</p>
+        <p className="font-semibold mt-2">
+          คุณเหลือสิทธิ์ในการยืมหนังสือ{" "}
+          <span className="underline decoration-double text-sky-500">
+            {bookCheckout}/5
+          </span>{" "}
+          เล่ม
+        </p>
       </section>
     </main>
   );
