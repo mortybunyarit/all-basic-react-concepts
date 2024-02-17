@@ -3,11 +3,11 @@ import { useState } from "react";
 function App() {
   const [number, setNumber] = useState(1);
 
-  const decrease = () => {
-    if (number > 0) {
-      setNumber(number - 1);
-    }
-  };
+  // const decrease = () => {
+  //   if (number > 0) {
+  //     setNumber(number - 1);
+  //   }
+  // };
 
   const increase = () => {
     if (number < 25) {
@@ -25,7 +25,11 @@ function App() {
         <div className="flex gap-1">
           <div>
             <button
-              onClick={decrease}
+              onClick={() => {
+                if (number > 0) {
+                  setNumber(number - 1);
+                }
+              }}
               className="bg-orange-500 border border-orange-600 p-3 rounded-md  w-20 h-12 flex justify-center"
             >
               previous
