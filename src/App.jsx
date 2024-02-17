@@ -33,7 +33,7 @@ export default function App() {
         </h1>
         <div className="my-4">
           <button className="border border-pink-400 bg-pink-500 rounded-lg p-2 text-white">
-            Favorite
+            Favourite
           </button>
           <button className="border border-orange-400 bg-orange-600 rounded-lg p-2 text-white mx-5">
             Reserve
